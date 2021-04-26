@@ -4,6 +4,7 @@
 ![Pygame integration example](example/sm-example.gif)
 
 [![Tests](https://github.com/timabilov/python-play3d/actions/workflows/python-package.yml/badge.svg?event=push)](https://github.com/timabilov/python-play3d/actions/workflows/python-package.yml)
+[![Latest PyPI version](https://img.shields.io/pypi/v/play3d)](https://pypi.python.org/pypi/play3d/)
 #### TL;DR: Basic 3D world playground with animations and [camera](#camera-keys-example) completely from scratch(only 2D pixels). 
 This implementation / API only for demonstration and *playground* purposes based on [Perspective projection](https://en.wikipedia.org/wiki/3D_projection#Perspective_projection).     
 Can be used on top of **any** 2d graphics engine/lib(frame buffers, sdl and etc.)
@@ -18,7 +19,7 @@ Not implemented features due to low performance:
 Also you can plot any function on 3D scene.
 
 
-* [Install](#intall)
+* [Install](#install)
 * [How to use](#how-to-use)
 * [Model View Projection](#model-view-projection)
   * [Projection](#projection)
@@ -34,13 +35,20 @@ Also you can plot any function on 3D scene.
 
 ## Install
 
-`pip install play3d`
+```
+pip install play3d
+```
 
 ## How to use
 
 There is only one requirement - to provide 2D pixel and line renderer(drawer)
 
-As current example uses `pygame`:
+As current example uses `pygame`,
+
+```
+pip install pygame==2.0.1 # recommended version
+```
+
 ```python
 from play3d.three_d import Device
 import pygame
@@ -59,7 +67,7 @@ screen = pygame.display.set_mode(Device.get_resolution())
 ```
 
 That's all we need for setting up environment. 
-Now we can create and render model objects by calling `Model.draw()` at each frame update (See example)\
+Now we can create and render model objects by calling `Model.draw()` at each frame update (See [Example](#pygame-example))\
 To create model you can simply pass 3D world vertices as 2-d list `Model(data=data)`
 
 It is possible to provide faces as 2d array  `Model(data=data, faces=faces)`. Face index starts from 1.  Only triangles supported. For more information see below.
@@ -94,10 +102,13 @@ while True: # your render lib/method
 Here we use perspective projection matrix\
 Z axis of clipped cube(from frustum) mapped to [-1, 1] and our camera directed to -z axis (OpenGL convention)\
 Projection Matrix can be tuned there (aspect ratio, FOV and etc.) \
-`Camera.near = 1`\
-`Camera.far = 10`\
-`Camera.fov = 60`\
-`Camera.aspect_ratio = 3/4` 
+```python
+Camera.near = 1
+Camera.far = 10
+Camera.fov = 60
+Camera.aspect_ratio = 3/4
+```
+
 
 ### World camera
 
@@ -227,6 +238,11 @@ model.matrix = Matrix([
 
 ```
 
+### Methods
+* `model_obj @ translate(x, y, z)`
+  
+  translates object's model matrix (in world space)
+
 ## Trajectory API
 
 `Models.Trajectory`
@@ -239,14 +255,15 @@ To move our object through defined path we can build Trajectory for our object.
 You can provide any parametric equation with args.\
 World coordinates defined by `func(*args)` tuple output.  
 
-#### `model_obj @ translate(x, y, z)`
-translates object's model matrix (in world space)
 
-#### `rotate(self, angle_x, angle_y=0, angle_z=0)`
-Rotates object relative to particular axis plane. First object translated from the world space back to local origin, then we rotate the object
+### Methods
+* `rotate(self, angle_x, angle_y=0, angle_z=0)`
+  
+  Rotates object relative to particular axis plane. First object translated from the world space back to local origin, then we rotate the object
 
-#### `route(self, trajectory: 'Trajectory', enable_trace=False)`
-Set the function-based  trajectory routing for the object.
+* `route(self, trajectory: 'Trajectory', enable_trace=False)` 
+  
+  Set the function-based  trajectory routing for the object.
 
   - trajectory `Trajectory` - trajectory state
   - enable_trace `bool` - Keep track of i.e. draw trajectory path (breadcrumbs)
