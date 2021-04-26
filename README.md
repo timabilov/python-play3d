@@ -47,6 +47,9 @@ As current example uses `pygame`,
 
 ```
 pip install pygame==2.0.1 # recommended version
+# You have to install sdl lib separately
+# for Mac OS:
+brew install sdl2 sdl2_gfx sdl2_image sdl2_mixer sdl2_net sdl2_ttf
 ```
 
 ```python
