@@ -76,6 +76,11 @@ class Matrix:
     def __str__(self):
         return str(self.matrix)
 
+    def __eq__(self, other: 'Matrix'):
+        print('EHE?', self)
+        print(other)
+        return (self.matrix == other.matrix).all()
+
 
 def matmul(matrix1, matrix2):
     """

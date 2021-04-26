@@ -3,8 +3,8 @@
 
 ![Pygame integration example](example/sm-example.gif)
 
-
-#### TL;DR: Some basic 3D world playground with animations and [camera](#camera-keys-example) completely from scratch(only 2D pixels). 
+[![Tests](https://github.com/timabilov/python-play3d/actions/workflows/python-package.yml/badge.svg?event=push)](https://github.com/timabilov/python-play3d/actions/workflows/python-package.yml)
+#### TL;DR: Basic 3D world playground with animations and [camera](#camera-keys-example) completely from scratch(only 2D pixels). 
 This implementation / API only for demonstration and *playground* purposes based on [Perspective projection](https://en.wikipedia.org/wiki/3D_projection#Perspective_projection).     
 Can be used on top of **any** 2d graphics engine/lib(frame buffers, sdl and etc.)
 
@@ -17,6 +17,8 @@ Not implemented features due to low performance:
 
 Also you can plot any function on 3D scene.
 
+
+* [Install](#intall)
 * [How to use](#how-to-use)
 * [Model View Projection](#model-view-projection)
   * [Projection](#projection)
@@ -29,6 +31,10 @@ Also you can plot any function on 3D scene.
 * [Model API](#models-api)
 * [Trajectory API](#trajectory-api)
 * [Pygame Example](#pygame-example)
+
+## Install
+
+`pip install play3d`
 
 ## How to use
 
