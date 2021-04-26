@@ -29,8 +29,10 @@ put_pixel = lambda x, y, color: pygame.draw.circle(screen, color, (x, y), 1)
 Device.set_renderer(put_pixel, line_renderer=line_adapter)
 
 grid = Grid(color=(30, 140, 200), dimensions=(30, 30))
-suzanne = Model.load_OBJ('suzanne.obj.txt', position=(3, 2, -7), color=white, rasterize=True)
-beetle = Model.load_OBJ('beetle.obj.txt', wireframe=False, color=white, position=(0, 2, -11), scale=3)
+
+# be aware of different scaling of .obj samples. Only vertices and faces supported!
+suzanne = Model.load_OBJ('https://raw.githubusercontent.com/OpenGLInsights/OpenGLInsightsCode/master/Chapter%2026%20Indexing%20Multiple%20Vertex%20Arrays/article/suzanne.obj', position=(3, 2, -7), color=white, rasterize=True)
+beetle = Model.load_OBJ('https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/beetle.obj', wireframe=False, color=white, position=(0, 2, -11), scale=3)
 beetle.rotate(0, 45, 50)
 
 camera = Camera.get_instance()

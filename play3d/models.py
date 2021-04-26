@@ -1,6 +1,7 @@
 import copy
 import math
 import numbers
+import urllib.request
 from collections import Iterable
 from inspect import signature
 
@@ -31,28 +32,32 @@ class Model:
     def load_OBJ(cls, path, rasterize=False, **kwargs):
         """
 
-        :param path:
+        :param path: file path or download url
         :param rasterize: True - means turn off rasterization - use only mesh
         :param kwargs:
         :return:
         """
         data = []
         faces = []
-        with open(path) as f:
-            l = f.readline()
-            while l:
-                if l.startswith('v '):
-                    v = [float(n) for n in l[2:].split()]
-                    if len(v) == 3:  # add default w=1 coord if not given
-                        v += [1]
 
-                    data.append(v)
+        if 'http' in path:
+            content = urllib.request.urlopen(path).read().decode('utf-8')
+        else:
+            content = open(path).read()
+        for l in content.splitlines():
 
-                if l.startswith('f '):
-                    v = list(map(lambda face: int(face.split('/')[0]), l[2:].split()))
+            if l.startswith('v '):
+                v = [float(n) for n in l[2:].split()]
+                if len(v) == 3:  # add default w=1 coord if not given
+                    v += [1]
 
-                    faces.append(v)
-                l = f.readline()
+                data.append(v)
+
+            if l.startswith('f '):
+                v = list(map(lambda face: int(face.split('/')[0]), l[2:].split()))
+
+                faces.append(v)
+
         obj = cls(**kwargs, data=data, faces=faces, rasterize=rasterize)
         return obj
 

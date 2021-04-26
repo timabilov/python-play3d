@@ -203,9 +203,12 @@ blow_your_head = Plot(
 Wawefront format is widely used as a standard in 3D graphics
 
 You can import your model here. Only vertices and faces supported.\
-`Model.load_OBJ(cls, path, wireframe=False, **all_model_kwargs)`
+`Model.load_OBJ(cls, path_or_url, wireframe=False, **all_model_kwargs)`
 
 You can find examples here [github.com/alecjacobson/common-3d-test-models](https://github.com/alecjacobson/common-3d-test-models)
+
+You might have to normalize(scale and etc.)each `.obj` sample differently \
+Only vertices and faces are supported.
 
 ```python
 Model.load_OBJ('beetle.obj.txt', wireframe=True, color=white, position=(-2, 2, -4), scale=3)
@@ -299,7 +302,7 @@ import sys
 import pygame
 
 from play3d.models import Model, Grid
-from pygame_utils import handle_camera_with_keys  # your keyboard control management
+from pygame_utils import handle_camera_with_keys # custom keyboard handling - moving camera 
 from play3d.three_d import Device, Camera
 from play3d.utils import capture_fps
 
@@ -323,8 +326,14 @@ put_pixel = lambda x, y, color: pygame.draw.circle(screen, color, (x, y), 1)
 Device.set_renderer(put_pixel, line_renderer=line_adapter)
 
 grid = Grid(color=(30, 140, 200), dimensions=(30, 30))
-suzanne = Model.load_OBJ('suzanne.obj.txt', position=(3, 2, -7), color=white, rasterize=True)
-beetle = Model.load_OBJ('beetle.obj.txt', wireframe=False, color=white, position=(0, 2, -11), scale=3)
+
+# be aware of different scaling of .obj samples. Only vertices and faces supported! 
+suzanne = Model.load_OBJ(
+  'https://raw.githubusercontent.com/OpenGLInsights/OpenGLInsightsCode/master/Chapter%2026%20Indexing%20Multiple%20Vertex%20Arrays/article/suzanne.obj',
+  position=(3, 2, -7), color=white, rasterize=True)
+beetle = Model.load_OBJ(
+  'https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/beetle.obj',
+   wireframe=False, color=white, position=(0, 2, -11), scale=3)
 beetle.rotate(0, 45, 50)
 
 camera = Camera.get_instance()
@@ -338,7 +347,7 @@ def frame():
         sys.exit(0)
 
     screen.fill(black)
-    handle_camera_with_keys()  # we can move our camera
+    handle_camera_with_keys()  # to move our camera - walk, can be ignored
     grid.draw()
     beetle.draw()
     suzanne.rotate(0, 1, 0).draw()
