@@ -91,8 +91,6 @@ class Model:
             self.data = Matrix(data)
             if faces:
                 self.faces = faces
-            if self.faces:
-                self.rasterize = kwargs.pop('rasterize', False)
         elif not self.data:
             self.data = Matrix(numpy.ndarray([1, 4], 'float32'))
         self.shimmering = shimmering

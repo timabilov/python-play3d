@@ -1,5 +1,4 @@
 import logging
-import os
 import sys
 
 import pygame
@@ -11,7 +10,6 @@ from play3d.utils import capture_fps
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
-os.environ["SDL_VIDEO_CENTERED"] = '1'
 black, white = (20, 20, 20), (230, 230, 230)
 
 
