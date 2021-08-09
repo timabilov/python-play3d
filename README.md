@@ -1,4 +1,4 @@
-3D Playground - on Python from scratch.
+3D Playground - Python 3D engine.
 =====================================
 
 ![Pygame integration example](example/sm-example.gif)
@@ -248,6 +248,17 @@ model.matrix = Matrix([
 * `model_obj @ translate(x, y, z)`
   
   translates object's model matrix (in world space)
+  
+* `rotate(self, angle_x, angle_y=0, angle_z=0)`
+  
+  Rotates object relative to particular axis plane. First object translated from the world space back to local origin, then we rotate the object
+
+* `route(self, trajectory: 'Trajectory', enable_trace=False)` 
+  
+  Set the function-based  trajectory routing for the object.
+
+  - trajectory `Trajectory` - trajectory state
+  - enable_trace `bool` - Keep track of i.e. draw trajectory path (breadcrumbs)
 
 ## Trajectory API
 
@@ -261,18 +272,6 @@ To move our object through defined path we can build Trajectory for our object.
 You can provide any parametric equation with args.\
 World coordinates defined by `func(*args)` tuple output.  
 
-
-### Methods
-* `rotate(self, angle_x, angle_y=0, angle_z=0)`
-  
-  Rotates object relative to particular axis plane. First object translated from the world space back to local origin, then we rotate the object
-
-* `route(self, trajectory: 'Trajectory', enable_trace=False)` 
-  
-  Set the function-based  trajectory routing for the object.
-
-  - trajectory `Trajectory` - trajectory state
-  - enable_trace `bool` - Keep track of i.e. draw trajectory path (breadcrumbs)
 
 #### Example
 ```python
