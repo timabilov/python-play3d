@@ -5,7 +5,7 @@
 
 [![Tests](https://github.com/timabilov/python-play3d/actions/workflows/python-package.yml/badge.svg?event=push)](https://github.com/timabilov/python-play3d/actions/workflows/python-package.yml)
 [![Latest PyPI version](https://img.shields.io/pypi/v/play3d)](https://pypi.python.org/pypi/play3d/)
-#### TL;DR: Basic 3D world playground with animations and [camera](#camera-keys-example) completely from scratch(only 2D pixels). 
+#### TL;DR: Basic 3D world playground with animations and [camera](#camera-keys-example) completely from scratch using 2D surface/canvas. 
 This implementation / API only for demonstration and *playground* purposes based on [Perspective projection](https://en.wikipedia.org/wiki/3D_projection#Perspective_projection).     
 Can be used on top of **any** 2d graphics engine/lib(frame buffers, sdl and etc.)
 
