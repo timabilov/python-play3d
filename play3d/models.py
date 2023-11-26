@@ -2,7 +2,10 @@ import copy
 import math
 import numbers
 import urllib.request
-from collections import Iterable
+if sys.version_info >= (3, 10):
+    from collections.abc import Iterable
+else:
+    from collections import Iterable
 from inspect import signature
 
 import numpy
